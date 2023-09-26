@@ -1,4 +1,4 @@
-import { createAction, createReducer } from '@reduxjs/toolkit';
+import { createAction, createReducer, nanoid } from '@reduxjs/toolkit';
 
 const initialState = {
   list: [
@@ -10,11 +10,14 @@ const initialState = {
   ],
 };
 
-export const setContactAC = createAction('contacts/set', contactCandidate => {
-  return {
-    payload: contactCandidate,
-  };
-});
+export const createContactAC = createAction(
+  'contacts/create',
+  contactCandidate => {
+    return {
+      payload: contactCandidate,
+    };
+  }
+);
 
 export const deleteContactAC = createAction('contacts/delete', idCandidate => ({
   payload: idCandidate,
@@ -22,6 +25,19 @@ export const deleteContactAC = createAction('contacts/delete', idCandidate => ({
 
 export const testAC = createAction('contacts/test');
 
-const contactsReducer = createReducer(initialState, builder => {});
+const contactsReducer = createReducer(initialState, builder => {
+  builder.addCase(createContactAC, (state, action) => {
+    state.list = [
+      ...state.list,
+      {
+        ...action.payload,
+        id: nanoid(),
+      },
+    ];
+  });
+  builder.addCase(deleteContactAC, (state, action) => {
+    state.list = state.list.filter(contact => contact.id !== action.payload);
+  });
+});
 
 export default contactsReducer;
