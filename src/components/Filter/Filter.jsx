@@ -1,25 +1,19 @@
-import propTypes from 'prop-types';
 import s from './filter.module.css';
 
-const Filter = ({ filterValue, changeEvent }) => {
+const Filter = props => {
   return (
     <div className={s.block}>
       <p className={s.text}>Find contacts by name</p>
       <input
-        value={filterValue}
+        value={props.filter}
         onChange={e => {
-          changeEvent(e.target.value);
+          props.changeFilter(e.target.value);
         }}
         className={s.inputFilter}
         placeholder="Entry name"
       />
     </div>
   );
-};
-
-Filter.propTypes = {
-  filterValue: propTypes.string,
-  changeEvent: propTypes.func,
 };
 
 export default Filter;

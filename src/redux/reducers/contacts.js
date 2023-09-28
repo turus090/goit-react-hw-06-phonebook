@@ -8,6 +8,7 @@ const initialState = {
       phone: '123-456',
     },
   ],
+  filter: '',
 };
 
 export const createContactAC = createAction(
@@ -23,7 +24,12 @@ export const deleteContactAC = createAction('contacts/delete', idCandidate => ({
   payload: idCandidate,
 }));
 
-export const testAC = createAction('contacts/test');
+export const changeFilterAC = createAction(
+  'contacts/change-filter',
+  newFiter => ({
+    payload: newFiter,
+  })
+);
 
 const contactsReducer = createReducer(initialState, builder => {
   builder.addCase(createContactAC, (state, action) => {
@@ -37,6 +43,9 @@ const contactsReducer = createReducer(initialState, builder => {
   });
   builder.addCase(deleteContactAC, (state, action) => {
     state.list = state.list.filter(contact => contact.id !== action.payload);
+  });
+  builder.addCase(changeFilterAC, (state, action) => {
+    state.filter = action.payload;
   });
 });
 
