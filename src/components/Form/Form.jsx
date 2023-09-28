@@ -7,11 +7,18 @@ const Form = props => {
   const [candidateName, setCandidateName] = useState('');
   const [candidatePhone, setCandidatePhone] = useState('');
   const handleCreateContact = () => {
-    console.log('click');
-    props.createContact({
-      name: candidateName,
-      phone: candidatePhone,
-    });
+    const result = props.list.find(
+      contactItem =>
+        contactItem.name.toLowerCase() === candidateName.toLowerCase()
+    );
+    if (result) {
+      Notify.warning(`${candidateName} is already in contact`);
+    } else {
+      props.createContact({
+        name: candidateName,
+        phone: candidatePhone,
+      });
+    }
   };
   return (
     <form className={s.form} onClick={e => e.preventDefault()}>

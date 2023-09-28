@@ -4,6 +4,7 @@ import { deleteContactAC } from 'redux/reducers/contacts';
 
 const mapStateProps = state => ({
   list: state.contacts.list,
+  filter: state.contacts.filter,
 });
 
 const mapDispatchProps = {

@@ -1,6 +1,11 @@
+import { startSearch } from 'assets/searchFn';
 import ListItem from './ListItem';
 const List = props => {
-  const listCollection = props.list.map(item => (
+  const currentList =
+    props.filter.length === 0
+      ? props.list
+      : startSearch(props.list, props.filter);
+  const listCollection = currentList.map(item => (
     <ListItem
       key={item.id}
       id={item.id}
@@ -9,6 +14,7 @@ const List = props => {
       deleteContact={props.deleteContact}
     />
   ));
+
   return <ul>{listCollection}</ul>;
 };
 
