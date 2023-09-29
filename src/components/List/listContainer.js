@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import List from './List';
-import { deleteContactAC } from 'redux/reducers/contacts';
+import { deleteContact } from 'redux/slices/contacts';
 
 const mapStateProps = state => ({
   list: state.contacts.list,
@@ -8,7 +8,7 @@ const mapStateProps = state => ({
 });
 
 const mapDispatchProps = {
-  deleteContact: deleteContactAC,
+  deleteContact: deleteContact,
 };
 
 export default connect(mapStateProps, mapDispatchProps)(List);

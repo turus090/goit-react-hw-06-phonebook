@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 import Filter from './Filter';
-import { changeFilterAC } from 'redux/reducers/contacts';
+import { changeFilter } from 'redux/slices/contacts';
 
 const mapStateToProps = state => ({
   filter: state.contacts.filter,
 });
 const mapDispatchToProps = {
-  changeFilter: changeFilterAC,
+  changeFilter: changeFilter,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter);
