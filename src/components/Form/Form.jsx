@@ -2,6 +2,7 @@ import s from './form.module.css';
 import Button from '../Button/Button';
 import { Notify } from 'notiflix';
 import { useState } from 'react';
+import { nanoid } from '@reduxjs/toolkit';
 
 const Form = props => {
   const [candidateName, setCandidateName] = useState('');
@@ -15,6 +16,7 @@ const Form = props => {
       Notify.warning(`${candidateName} is already in contact`);
     } else {
       props.createContact({
+        id: nanoid(),
         name: candidateName,
         phone: candidatePhone,
       });
